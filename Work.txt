@@ -1,0 +1,25 @@
+Question 1.1:
+-------------
+SELECT DEPTNAME, count(DEPTNAME) AS DeptNameCount FROM DEPARTMENT WHERE DEPTNAME IS NOT NULL AND 'DeptNameCoun' !=0 GROUP By DEPTNAME ORDER BY DeptNameCount DESC, DEPTNAME ASC;
+
+
+
+Question 1.2
+-------------
+SELECT   academic.title, 
+         academic.givename, 
+         academic.famname,
+         Count(paper.title) AS PaperCount
+     FROM academic, interest, paper, author
+     WHERE academic.title like 'dr'
+         AND interest.descrip like '%database%'
+         AND interest.acnum = academic.acnum
+         AND paper.title like '%database%'
+         AND paper.panum = author.panum
+         AND author.acnum = academic.acnum
+     GROUP BY academic.acnum
+     ORDER BY PaperCount DESC, academic.famname ASC, academic.givename ASC
+	 
+	 
+Question 2.1
+-------------
