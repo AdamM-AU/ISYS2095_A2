@@ -18,8 +18,58 @@ SELECT   academic.title,
          AND paper.panum = author.panum
          AND author.acnum = academic.acnum
      GROUP BY academic.acnum
-     ORDER BY PaperCount DESC, academic.famname ASC, academic.givename ASC
+     ORDER BY PaperCount DESC, academic.famname ASC, academic.givename ASC;
+
 	 
 	 
 Question 2.1
 -------------
+SELECT  department.deptnum,
+        department.deptname,
+        department.state
+    FROM department
+    WHERE UPPER(department.state) IN ("VIC", "QLD")
+        AND department.deptnum NOT IN ( SELECT academic.deptnum FROM academic );
+		
+
+
+Question 2.2
+-------------
+SELECT  department.deptnum,
+        department.deptname,
+        department.state
+    FROM department
+    WHERE NOT EXISTS( SELECT academic.deptnum FROM academic WHERE academic.deptnum = department.deptnum GROUP BY academic.deptnum )
+    AND UPPER(department.state) IN ("VIC", "QLD");
+	
+
+
+Question 2.3
+-------------
+SELECT academic.acnum,
+       academic.title || '. ' || academic.givename || ' ' || academic.famname AS [Full Name]
+  FROM academic
+ WHERE academic.acnum IN (
+           SELECT author.acnum
+             FROM author
+            WHERE academic.acnum IN (SELECT acnum from author WHERE panum IN (SELECT panum from author WHERE ACNUM=202) GROUP BY ACNUM)
+       )
+       AND academic.acnum != 202
+   GROUP BY acnum
+   ORDER BY academic.FAMNAME, academic.givename
+   
+   
+
+Question 2.4
+-------------   
+SELECT deptname
+  FROM (
+        SELECT deptname,
+               MAX(occur) 
+           FROM (
+                 SELECT deptname,
+                        Count(deptname) AS occur
+                   FROM department
+                   GROUP BY deptname
+                )
+        );
