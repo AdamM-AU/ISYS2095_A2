@@ -10,6 +10,16 @@ SELECT DEPTNAME,
           DEPTNAME ASC;
 
 
+CORECTED My Formatiing:
+SELECT department.deptname,
+       count(department.deptname) AS DeptNameCount
+  FROM department
+ WHERE department.deptname IS NOT NULL AND 
+       'DeptNameCoun' != 0
+ GROUP BY department.deptname
+ ORDER BY DeptNameCount DESC,
+          department.deptname ASC;
+
 
 Question 1.2
 -------------
