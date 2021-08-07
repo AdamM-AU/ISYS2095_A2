@@ -1,0 +1,24 @@
+1NF Rules:
+- Column Names must be unique
+- Stored data in required order
+- No Mixed Data types in columns
+- No Multivalued attributes in columns (A,B) should only be A
+- CAN NOT use a Composite Key (Key + Key OR PKEY + Key)
+
+2NF Rules:
+- Be in 1NF Form
+- Have No Partial Dependencies
+- Have a composite key
+
+3NF Rules:
+- Be in 2NF Form
+- Have No Transitive Dependency
+
+
+Definitions:
+Dependency = Functional Dependency (We can use PKey/Primary Key to fetch any attribute from the table
+Partial = Data non reliant on PKey -> Should be in another table or its own table
+OR/AND
+Where an attribute in the table depends on only part of the PKey(Composite PKEY) and not the PKey (Composite PKey) as a whole
+
+Transitive = When a non-primary attribute depends on another or other non-prime attributes rather than depending upon the primary attributes or PKEY
